@@ -15,3 +15,5 @@ C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\RealTi
 C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\RealTimeChatApp.csproj.CoreCompileInputs.cache
 C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\RealTimeChatApp.exe
 C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\RealTimeChatApp.pdb
+C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\SignupScreen.g.cs
+C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\SignupScreen.baml

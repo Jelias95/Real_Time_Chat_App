@@ -13,6 +13,9 @@
         <TextBox Name="inputUsername" Margin="10"/>
         <Label Content="Password" HorizontalAlignment="Center"/>
         <PasswordBox Name="inputPassword" Margin="10"/>
-        <Button Name="btnSubmit" Content="Submit" Margin="60 10" Click="AttemptUserAuthentication"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Name="btnSubmit" Content="Submit" Margin="40 10" Click="AttemptUserAuthentication"/>
+            <Button Name="btnSignup" Content="Signup" Margin="40 10" Click="OpenSignupForm" />
+        </StackPanel>
     </StackPanel>
 </Window>

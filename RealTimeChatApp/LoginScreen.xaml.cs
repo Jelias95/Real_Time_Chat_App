@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RealTimeChatApp
 {
@@ -40,11 +28,11 @@ namespace RealTimeChatApp
 
             this.Dispatcher.Invoke(() =>
             {
-                    MessageBox.Show("User is authorized!");
+                MessageBox.Show("User is authorized!");
             });
         }
 
-        // Method to validate usernamen and password
+        // Method to validate username and password
         private bool IsAuthorizedUser(string username, string password)
         {
             return username == "User" && password == "Password";
@@ -68,8 +56,15 @@ namespace RealTimeChatApp
         // Background listener thread created on screen load
         private void LoginLoaded(object sender, RoutedEventArgs e)
         {
-            Thread thread = new Thread(new ThreadStart(this.DisplayAuthorizationMessage));
-            thread.Start();
+            new Thread(new ThreadStart(this.DisplayAuthorizationMessage)).Start();
+        }
+
+        // Method to open signup form
+        private void OpenSignupForm(object sender, RoutedEventArgs e)
+        {
+            SignupScreen signupScreen = new SignupScreen();
+            signupScreen.Show();
+            this.Close();
         }
     }
 }

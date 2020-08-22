@@ -1,0 +1,22 @@
+﻿<Window x:Class="RealTimeChatApp.SignupScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RealTimeChatApp"
+        mc:Ignorable="d"
+        Title="Signup" Height="375" Width="250" Loaded="SignupLoaded">
+    <StackPanel>
+        <Label Content="Signup" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" />
+        <Separator />
+        <Label Content="First Name" HorizontalAlignment="Center" />
+        <TextBox Name="inputFName" Margin="10" />
+        <Label Content="Last Name" HorizontalAlignment="Center" />
+        <TextBox Name="inputLName" Margin="10" />
+        <Label Content="Username" HorizontalAlignment="Center" />
+        <TextBox Name="inputUsername" Margin="10" />
+        <Label Content="Password" HorizontalAlignment="Center" />
+        <PasswordBox Name="inputPassword" Margin="10" />
+        <Button Name="btnSubmit" Content="Signup" Margin="60 10" Click="CreateUser" />
+    </StackPanel>
+</Window>
