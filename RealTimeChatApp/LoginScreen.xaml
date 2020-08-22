@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RealTimeChatApp"
         mc:Ignorable="d"
-        Title="Login" Height="250" Width="250">
+        Title="Login" Height="250" Width="250" Loaded="LoginLoaded">
     <StackPanel>
         <Label Content="Login" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
         <Separator />
@@ -13,6 +13,6 @@
         <TextBox Name="inputUsername" Margin="10"/>
         <Label Content="Password" HorizontalAlignment="Center"/>
         <PasswordBox Name="inputPassword" Margin="10"/>
-        <Button Name="btnSubmit" Content="Submit" Margin="60 10" />
+        <Button Name="btnSubmit" Content="Submit" Margin="60 10" Click="AttemptUserAuthentication"/>
     </StackPanel>
 </Window>
