@@ -24,5 +24,10 @@ namespace RealTimeChatApp
         {
             InitializeComponent();
         }
+
+        private void UserList_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

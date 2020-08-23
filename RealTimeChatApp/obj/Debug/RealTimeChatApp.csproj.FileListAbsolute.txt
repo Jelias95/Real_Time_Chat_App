@@ -17,3 +17,6 @@ C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\RealTi
 C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\RealTimeChatApp.pdb
 C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\SignupScreen.g.cs
 C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\SignupScreen.baml
+C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\ChatBox.g.cs
+C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\obj\Debug\ChatBox.baml
