@@ -8,29 +8,27 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="270" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1" Background="LightGray" />
-        <StackPanel Grid.Column="0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Name="Groups" Content="Groups" Margin="10 10"/>
-                <Button Grid.Column="1" Name="Users" Content="Users" Margin="10 10"/>
-            </Grid>
-            <ListView>
-                <ListViewItem HorizontalAlignment="Stretch">
-                    <StackPanel>
-                        <TextBlock Text="User 1" Margin="10 0" />
-                    </StackPanel>
-                </ListViewItem>
-            </ListView>
-        </StackPanel>
-        <Grid.DataContext>
-            <local:ChatBox />
-        </Grid.DataContext>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ListBox Grid.Row="0" Name="users">
+                <Label Content="Users" />
+                <Separator />
+            </ListBox>
+            <ListBox Grid.Row="1" Name="groups">
+                <Label Content="Groups" />
+                <Separator />
+            </ListBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <ListBox Name="messages" />
+            <TextBox Name="messageBox" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="592" Height="20" />
+            <Button Name="sendButton" Content="Send" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+        </Grid>
     </Grid>
 </Window>
