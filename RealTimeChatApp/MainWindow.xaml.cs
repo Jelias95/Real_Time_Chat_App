@@ -20,7 +20,11 @@ namespace RealTimeChatApp
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
+
     {
+        // Dummy message holder
+        public Dictionary<string, List<string>> msgs;
+
         // MainWindow constructor
         public MainWindow()
         {
@@ -30,26 +34,34 @@ namespace RealTimeChatApp
         // Function called when the window loads
         private void AppLoaded(object sender, RoutedEventArgs e)
         {
+            msgs = new Dictionary<string, List<string>> {
+                {"bob", new List<string> {"Hello User", "Hello Bob" }},
+                {"samantha", new List<string> {"Hello Samantha", "Hello User!"}},
+                {"general", new List<string> {"Hello everyone! This is Bob", "This is User!", "This is Samantha!"}},
+                {"group 1", new List<string> {"Welcome to the group 1 chat!"}},
+                {"group 2", new List<string> {"Welcome to group 2 chat"}}
+            };
             GetUsers();
             GetGroups();
-            GetMessages("general");
         }
 
         // Function called when a user is selected
         private void UserChanged(object sender, RoutedEventArgs e)
         {
+            ListBoxItem listItem = (ListBoxItem)users.SelectedItem;
             if (users.SelectedItem != null)
             {
-                GetMessages(users.SelectedItem.ToString());
+                GetMessages(listItem.Content.ToString());
             }
         }
 
         // Function called when a group is selected
         private void GroupChanged(object sender, RoutedEventArgs e)
         {
-            if (groups.SelectedItem != null)
+            ListBoxItem listItem = (ListBoxItem)groups.SelectedItem;
+            if (listItem != null)
             {
-                GetMessages(groups.SelectedItem.ToString());
+                GetMessages(listItem.Content.ToString());
             }
         }
 
@@ -71,7 +83,7 @@ namespace RealTimeChatApp
         private void GetGroups()
         {
             // TODO: Replace with actual call to get users
-            List<string> allGroups = new List<string> { "general", "group 1" };
+            List<string> allGroups = new List<string> { "general", "group 1", "group 2" };
             foreach(string group in allGroups)
             {
                 this.Dispatcher.Invoke(() =>
@@ -84,7 +96,11 @@ namespace RealTimeChatApp
         // Function to get messages for a selected group
         private void GetMessages(string messageGroup)
         {
-
+            messages.Items.Clear();
+            foreach (string msg in msgs[messageGroup])
+            {
+                messages.Items.Add(new ListBoxItem { Content = msg });
+            }
         }
     }
 }
