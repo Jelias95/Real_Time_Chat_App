@@ -35,7 +35,8 @@ namespace RealTimeChatApp
         // Method to validate username and password
         private bool IsAuthorizedUser(string username, string password)
         {
-            return username == "User" && password == "Password";
+            // TODO: Replace with actual authentication check
+            return true;
         }
 
         // Method called by button click that lets authorized users into the app

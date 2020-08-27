@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RealTimeChatApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="AppLoaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -16,11 +16,11 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ListBox Grid.Row="0" Name="users">
+            <ListBox Grid.Row="0" Name="users" SelectionChanged="UserChanged">
                 <Label Content="Users" />
                 <Separator />
             </ListBox>
-            <ListBox Grid.Row="1" Name="groups">
+            <ListBox Grid.Row="1" Name="groups" SelectionChanged="GroupChanged">
                 <Label Content="Groups" />
                 <Separator />
             </ListBox>

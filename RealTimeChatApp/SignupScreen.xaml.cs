@@ -35,6 +35,7 @@ namespace RealTimeChatApp
         // Method to create user (dummy method)
         private bool AttemptUserCreation(string fName, string lName, string username, string password)
         {
+            // TODO: Replace with actual call to create user, setup to return user ID
             return true;
         }
 
