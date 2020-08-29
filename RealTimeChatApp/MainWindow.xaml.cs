@@ -31,7 +31,7 @@ namespace RealTimeChatApp
         // TODO: Replace with actual call to get users
         public List<string> allUsers = new List<string> { "bob", "samantha" };
 
-        // TODO: Replace with actual call to get groups
+        // TODO: Replace with actual call to get users
         public List<string> allGroups = new List<string> { "general", "group 1", "group 2" };
 
         // MainWindow constructor
@@ -50,9 +50,12 @@ namespace RealTimeChatApp
                 {"group 1", new List<string> {"Welcome to the group 1 chat!"}},
                 {"group 2", new List<string> {"Welcome to group 2 chat"}}
             };
-            currentChat = "general";
-            new Thread(new ThreadStart(this.GetUsers)).Start();
-            new Thread(new ThreadStart(this.GetGroups)).Start();
+            GetUsers();
+            GetGroups();
+            GetMessages();
+            new Thread(new ThreadStart(this.CheckForMessages)).Start();
+            new Thread(new ThreadStart(this.CheckForUsers)).Start();
+            new Thread(new ThreadStart(this.CheckForGroups)).Start();
         }
 
         // Function called when a user is selected
@@ -62,7 +65,6 @@ namespace RealTimeChatApp
             if (users.SelectedItem != null)
             {
                 currentChat = listItem.Content.ToString();
-                GetMessages(currentChat);
             }
         }
 
@@ -73,65 +75,32 @@ namespace RealTimeChatApp
             if (listItem != null)
             {
                 currentChat = listItem.Content.ToString();
-                GetMessages(currentChat);
             }
         }
 
-        // Callback to get all users
+        // Function to get all users
         private void GetUsers()
         {
-            int numberUsers = 0;
-            do
+            foreach(string usr in allUsers)
             {
-                if (numberUsers != allUsers.Count)
-                {
-                    numberUsers = allUsers.Count;
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        users.Items.Clear();
-                    });
-                    foreach (string usr in allUsers)
-                    {
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            users.Items.Add(new ListBoxItem { Content = usr });
-                        });
-                    }
-                }
-                Thread.Sleep(1000);
-            } while (true);
+                users.Items.Add(new ListBoxItem { Content = usr });
+            }
         }
 
-        // Callback to get all groups
+        // Function to get all groups
         private void GetGroups()
         {
-            int numberGroups = 0;
-            do
+            foreach(string group in allGroups)
             {
-                if (numberGroups != allGroups.Count)
-                {
-                    numberGroups = allGroups.Count;
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        groups.Items.Clear();
-                    });
-                    foreach (string group in allGroups)
-                    {
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            groups.Items.Add(new ListBoxItem { Content = group, IsSelected = (group == "general") });
-                        });
-                    }
-                }
-                Thread.Sleep(1000);
-            } while (true);
+                groups.Items.Add(new ListBoxItem { Content = group, IsSelected = (group == "general") });
+            }
         }
 
         // Function to get messages for a selected group
-        private void GetMessages(string messageGroup)
+        private void GetMessages()
         {
             messages.Items.Clear();
-            foreach (string msg in msgs[messageGroup])
+            foreach (string msg in msgs[currentChat])
             {
                 messages.Items.Add(new ListBoxItem { Content = msg });
             }
@@ -142,8 +111,77 @@ namespace RealTimeChatApp
         {
             string msg = messageBox.Text;
             msgs[currentChat].Add(msg);
-            messageBox.Clear();
-            GetMessages(currentChat);
+        }
+
+        // Callback for users
+        private void CheckForUsers()
+        {
+            int numberUsers = allUsers.Count;
+            while(true)
+            {
+                if (numberUsers != allUsers.Count)
+                {
+                    foreach (string user in allUsers.Skip(numberUsers))
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            users.Items.Add(new ListBoxItem { Content = user });
+                        });
+                    }
+                    numberUsers = allUsers.Count;
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        // Callback for groups
+        private void CheckForGroups()
+        {
+            int numberGroups = allGroups.Count;
+            while (true)
+            {
+                if (numberGroups != allGroups.Count)
+                {
+                    foreach (string group in allGroups.Skip(numberGroups))
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            groups.Items.Add(new ListBoxItem { Content = group });
+                        });
+                    }
+                    numberGroups = allGroups.Count;
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        // Callback for messages
+        private void CheckForMessages()
+        {
+            int numberMessages = msgs[currentChat].Count;
+            string curr = currentChat;
+            while (true)
+            {
+                if (curr != currentChat)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        this.GetMessages();
+                    });
+                    curr = currentChat;
+                } else if (numberMessages != msgs[currentChat].Count)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        foreach (string msg in msgs[currentChat].Skip(numberMessages))
+                        {
+                            messages.Items.Add(new ListBoxItem { Content = msg });
+                        }
+                    });
+                    numberMessages = msgs[currentChat].Count;
+                }
+                Thread.Sleep(1000);
+            }
         }
     }
 }
