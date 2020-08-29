@@ -1,0 +1,14 @@
+﻿<Window x:Class="RealTimeChatApp.RequestGroupAccess"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RealTimeChatApp"
+        mc:Ignorable="d"
+        Title="RequestAccess" Height="250" Width="250">
+    <StackPanel>
+        <Label Content="Request Access to the Following Group: " HorizontalAlignment="Center" />
+        <TextBox Name="groupName" Margin="10" />
+        <Button Name="RequestAccess" Content="Submit Access Request" Click="SubmitRequest" Margin="40 10" />
+    </StackPanel>
+</Window>

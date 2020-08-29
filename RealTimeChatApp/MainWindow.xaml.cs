@@ -34,6 +34,12 @@ namespace RealTimeChatApp
         // TODO: Replace with actual call to get users
         public List<string> allGroups = new List<string> { "general", "group 1", "group 2" };
 
+        // TODO: Replace with real user permission list
+        public bool group2Permission = false;
+
+        // TODO: Replace with real list of access requests
+        public int numOfRequests = 0;
+
         // MainWindow constructor
         public MainWindow()
         {
@@ -56,6 +62,7 @@ namespace RealTimeChatApp
             new Thread(new ThreadStart(this.CheckForMessages)).Start();
             new Thread(new ThreadStart(this.CheckForUsers)).Start();
             new Thread(new ThreadStart(this.CheckForGroups)).Start();
+            new Thread(new ThreadStart(this.CheckForGroupRequests)).Start();
         }
 
         // Function called when a user is selected
@@ -74,7 +81,14 @@ namespace RealTimeChatApp
             ListBoxItem listItem = (ListBoxItem)groups.SelectedItem;
             if (listItem != null)
             {
-                currentChat = listItem.Content.ToString();
+                if (group2Permission || listItem.Content.ToString() != "group 2")
+                {
+                    currentChat = listItem.Content.ToString();
+                } else
+                {
+                    MessageBox.Show("You are not a member of this group");
+                    groups.SelectedIndex = -1;
+                }
             }
         }
 
@@ -182,6 +196,32 @@ namespace RealTimeChatApp
                 }
                 Thread.Sleep(1000);
             }
+        }
+
+        // Callback for group requests
+        private void CheckForGroupRequests()
+        {
+            while (true)
+            {
+                if (numOfRequests > 0)
+                {
+                    while (numOfRequests > 0)
+                    {
+                        MessageBox.Show("Temporary Message Assuming Group 2 Access Approval");
+                        numOfRequests--;
+                    }
+                    group2Permission = true;
+                }
+                Thread.Sleep(15000);
+            }
+        }
+
+        // TODO: Dummy request access request
+        private void RequestAccess(object sender, RoutedEventArgs e)
+        {
+            RequestGroupAccess accessWindow = new RequestGroupAccess();
+            accessWindow.Show();
+            numOfRequests++;
         }
     }
 }

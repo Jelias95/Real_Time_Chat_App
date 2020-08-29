@@ -22,6 +22,7 @@
             </ListBox>
             <ListBox Grid.Row="1" Name="groups" SelectionChanged="GroupChanged">
                 <Label Content="Groups" />
+                <Button Content="Request Group Access" Click="RequestAccess" />
                 <Separator />
             </ListBox>
         </Grid>

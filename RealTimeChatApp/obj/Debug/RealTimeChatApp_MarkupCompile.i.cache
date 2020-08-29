@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\james\source\repos\Project3_JamesElias\RealTimeChatApp\App.xaml
-31093024730
+41146308075
 
-8-1820434339
+9-2036370568
 13-1505183044
-LoginScreen.xaml;MainWindow.xaml;SignupScreen.xaml;
+LoginScreen.xaml;MainWindow.xaml;RequestGroupAccess.xaml;SignupScreen.xaml;
 
-True
+False
 
