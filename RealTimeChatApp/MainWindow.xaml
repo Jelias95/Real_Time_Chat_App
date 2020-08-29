@@ -28,7 +28,7 @@
         <Grid Grid.Column="1">
             <ListBox Name="messages" />
             <TextBox Name="messageBox" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="592" Height="20" />
-            <Button Name="sendButton" Content="Send" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+            <Button Name="sendButton" Content="Send" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="SendMessage" />
         </Grid>
     </Grid>
 </Window>

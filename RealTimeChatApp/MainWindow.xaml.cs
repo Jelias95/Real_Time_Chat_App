@@ -25,6 +25,15 @@ namespace RealTimeChatApp
         // Dummy message holder
         public Dictionary<string, List<string>> msgs;
 
+        // Var to track current chatting window
+        public string currentChat;
+
+        // TODO: Replace with actual call to get users
+        public List<string> allUsers = new List<string> { "bob", "samantha" };
+
+        // TODO: Replace with actual call to get groups
+        public List<string> allGroups = new List<string> { "general", "group 1", "group 2" };
+
         // MainWindow constructor
         public MainWindow()
         {
@@ -41,8 +50,9 @@ namespace RealTimeChatApp
                 {"group 1", new List<string> {"Welcome to the group 1 chat!"}},
                 {"group 2", new List<string> {"Welcome to group 2 chat"}}
             };
-            GetUsers();
-            GetGroups();
+            currentChat = "general";
+            new Thread(new ThreadStart(this.GetUsers)).Start();
+            new Thread(new ThreadStart(this.GetGroups)).Start();
         }
 
         // Function called when a user is selected
@@ -51,7 +61,8 @@ namespace RealTimeChatApp
             ListBoxItem listItem = (ListBoxItem)users.SelectedItem;
             if (users.SelectedItem != null)
             {
-                GetMessages(listItem.Content.ToString());
+                currentChat = listItem.Content.ToString();
+                GetMessages(currentChat);
             }
         }
 
@@ -61,36 +72,59 @@ namespace RealTimeChatApp
             ListBoxItem listItem = (ListBoxItem)groups.SelectedItem;
             if (listItem != null)
             {
-                GetMessages(listItem.Content.ToString());
+                currentChat = listItem.Content.ToString();
+                GetMessages(currentChat);
             }
         }
 
-        // Function to get all users
+        // Callback to get all users
         private void GetUsers()
         {
-            // TODO: Replace with actual call to get users
-            List<string> allUsers = new List<string> { "bob", "samantha" };
-            foreach(string usr in allUsers)
+            int numberUsers = 0;
+            do
             {
-                this.Dispatcher.Invoke(() =>
+                if (numberUsers != allUsers.Count)
                 {
-                    users.Items.Add(new ListBoxItem { Content = usr });
-                });
-            }
+                    numberUsers = allUsers.Count;
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        users.Items.Clear();
+                    });
+                    foreach (string usr in allUsers)
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            users.Items.Add(new ListBoxItem { Content = usr });
+                        });
+                    }
+                }
+                Thread.Sleep(1000);
+            } while (true);
         }
 
-        // Function to get all groups
+        // Callback to get all groups
         private void GetGroups()
         {
-            // TODO: Replace with actual call to get users
-            List<string> allGroups = new List<string> { "general", "group 1", "group 2" };
-            foreach(string group in allGroups)
+            int numberGroups = 0;
+            do
             {
-                this.Dispatcher.Invoke(() =>
+                if (numberGroups != allGroups.Count)
                 {
-                    groups.Items.Add(new ListBoxItem { Content = group, IsSelected = (group == "general") });
-                });
-            }
+                    numberGroups = allGroups.Count;
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        groups.Items.Clear();
+                    });
+                    foreach (string group in allGroups)
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            groups.Items.Add(new ListBoxItem { Content = group, IsSelected = (group == "general") });
+                        });
+                    }
+                }
+                Thread.Sleep(1000);
+            } while (true);
         }
 
         // Function to get messages for a selected group
@@ -101,6 +135,15 @@ namespace RealTimeChatApp
             {
                 messages.Items.Add(new ListBoxItem { Content = msg });
             }
+        }
+
+        // Function to send a message
+        private void SendMessage(object sender, RoutedEventArgs e)
+        {
+            string msg = messageBox.Text;
+            msgs[currentChat].Add(msg);
+            messageBox.Clear();
+            GetMessages(currentChat);
         }
     }
 }
